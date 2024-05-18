@@ -1,70 +1,131 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity, Linking,StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import Swiper from 'react-native-swiper';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 
-export default function HomeScreen() {
+export default function Home() {
+  const navigation = useNavigation();
+
+  const handleFormationPress = () => {
+    navigation.navigate('formations'); // Naviguer vers l'écran des formations0
+  };
+
+  const handleDptPress = () => {
+    navigation.navigate('ChurchDepartmentsTable'); // Naviguer vers l'écran des départements
+  };
+
+  const handleVisionPress = () => {
+    navigation.navigate('VisionScreen'); // Naviguer vers l'écran de la vision
+  };
+
+  const handleDonPress = () => {
+    navigation.navigate('DonationScreen'); // Naviguer vers l'écran des dons
+  };
+
+  const handleShopPress = () => {
+    const shopUrl = 'https://cep-resurrection.org/boutique/';
+    Linking.openURL(shopUrl); // Ouvrir l'URL dans le navigateur externe
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View  style={homeStyle.container}>
+       <Image source={require('../../assets/images/logo.png')} style={homeStyle.logo} />
+       <ScrollView>
+      {/* En-tête avec le logo */}
+      <View>
+       
+        <Swiper style={homeStyle.sliderContainer} autoplay={true} autoplayTimeout={3}>
+          <View>
+            <Image source={require('../../assets/images/ann.jpeg')} style={homeStyle.homeImg} />
+          </View>
+          <View>
+            <Image source={require('../../assets/images/mag.jpeg')}style={homeStyle.homeImg} />
+          </View>
+          <View>
+            <Image source={require('../../assets/images/sis.jpg')} style={homeStyle.homeImg} />
+          </View>
+        </Swiper>
+      </View>
+
+      {/* Contenu restant de la page */}
+      <Text style={homeStyle.prog}>Nos Programmes</Text>
+      <View style={homeStyle.imageContainer}>
+        <Image source={require('../../assets/images/mard.jpeg')} style={homeStyle.horaireImg} />
+        <Image source={require('../../assets/images/ven.jpeg')} style={homeStyle.horaireImg} />
+        <Image source={require('../../assets/images/dim.jpeg')} style={homeStyle.horaireImg} />
+      </View>
+      <TouchableOpacity onPress={handleFormationPress}>
+        <Image source={require('../../assets/images/formations.png')} style={homeStyle.formation} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleDonPress}>
+        <Image source={require('../../assets/images/dons.png')} style={homeStyle.formation} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleVisionPress}>
+        <Image source={require('../../assets/images/vision.png')} style={homeStyle.formation} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleDptPress}>
+        <Image source={require('../../assets/images/dept.png')} style={homeStyle.formation} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleShopPress}>
+        <Image source={require('../../assets/images/bout.jpeg')} style={homeStyle.formation} />
+      </TouchableOpacity>
+    </ScrollView>
+    </View>
+    
   );
 }
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+const homeStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+ 
+  },
+  sliderContainer: {
+    height: 200,
+    marginBottom: 10,
+  },
+  wrapper: {},
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  slideImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+    borderRadius: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  homeImg: {
+    width: 450,
+    height: 240,
+  },
+  imageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center', // Alignement vertical au centre
+    padding: 5,
+  },
+  horaireImg: {
+    width: 130,
+    height: 130,
+    resizeMode: 'cover',
+  },
+  prog: {
+    
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  formation: {
+    width: '100%',
+    height: 150,
+  },
+  logo: {
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
+    marginBottom: 10,
+    marginTop: 40, // Ajustez cette valeur pour définir l'espace en haut du logo
   },
 });

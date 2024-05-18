@@ -31,6 +31,10 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
+        <Stack.Screen name="DonationScreen" options={{ headerShown: false }} />
+        <Stack.Screen name="ChurchDepartmentsTable" options={{ headerShown: false }} />
+        <Stack.Screen name="VisionScreen" options={{ headerShown: false }} />
+        <Stack.Screen name="FormationDetailScreen" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
   );
