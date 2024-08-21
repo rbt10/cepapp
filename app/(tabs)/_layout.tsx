@@ -4,6 +4,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -44,6 +45,13 @@ export default function TabLayout() {
             tabBarIcon: ({ color }) => <FontAwesome size={28} name="graduation-cap" color={color} />,
           }}
         />
+        <Tabs.Screen
+        name="prier"
+        options={{
+          title: 'prier',
+          tabBarIcon: ({ color }) => <FontAwesome5 size={28} name="pray" color={color} />,
+        }}
+      />
         
     </Tabs>
   );

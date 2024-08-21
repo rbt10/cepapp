@@ -1,17 +1,16 @@
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Linking, ActivityIndicator, ImageBackground, Image } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { fetchPlaylists } from '@/api/fetchPlaylists';
+import { fetchPlaylists } from '@/api/fetchPlaylists'; // Assure-toi que cette fonction est bien définie
 
-const enseignements = () => {
-
+const VideosScreen = ({ route, navigation }) => {
+  const { playlistId } = route.params;
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const playlistId = 'ID_DE_LA_PLAYLIST'; // Assurez-vous que playlistId est correctement défini
     const fetchVideos = async () => {
       try {
-        const videosData = await fetchPlaylists(playlistId);
+        const videosData = await fetchPlaylists(playlistId); // Récupère les vidéos d'une playlist spécifique
         setVideos(videosData);
         setLoading(false);
       } catch (error) {
@@ -19,13 +18,8 @@ const enseignements = () => {
         setLoading(false);
       }
     };
-    fetchVideos(); 
-  }, []);
-
-  const handleVideoPress = () => {
-    const playlistUrl = 'https://www.youtube.com/c/CepR%C3%A9surrectionTV/playlists';
-    Linking.openURL(playlistUrl);
-  };
+    fetchVideos();
+  }, [playlistId]);
 
   if (loading) {
     return (
@@ -37,22 +31,14 @@ const enseignements = () => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={require('../../assets/images/ense.jpg')}
-        style={styles.headerBackground}
-      >
-        <Text style={styles.title}>NOS ENSEIGNEMENTS PAR THÈME :</Text>
-        <Text style={styles.subtitle}>
-          Pour ne rien manquer, abonnez-vous et activez la cloche de notification sur YouTube
-        </Text>
-      </ImageBackground>
+      <Text style={styles.title}>Vidéos de la Playlist</Text>
       <FlatList
         data={videos}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.videoItem}
-            onPress={handleVideoPress} // Pas besoin de passer videoId ici
+            onPress={() => navigation.navigate('VideoPlayer', { videoId: item.id })}
           >
             <Image
               source={{ uri: item.snippet.thumbnails.default.url }}
@@ -72,28 +58,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  headerBackground: {
-    width: '100%',
-    height: 200,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#fff',
     textAlign: 'center',
-    marginBottom: 10,
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 5,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#fff',
-    textAlign: 'center',
-    marginBottom: 20,
+    marginVertical: 20,
   },
   videoItem: {
     flexDirection: 'row',
@@ -119,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default enseignements;
+export default VideosScreen;

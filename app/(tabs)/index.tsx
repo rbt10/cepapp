@@ -1,100 +1,87 @@
-import { View, Text, ScrollView, Image, TouchableOpacity, Linking,StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, ScrollView, Image, TouchableOpacity, Linking, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Swiper from 'react-native-swiper';
-
+import { scheduleNotifications } from '../services/Notification';
 
 export default function Home() {
   const navigation = useNavigation();
 
+  useEffect(() => {
+    scheduleNotifications();
+  }, []);
+
   const handleFormationPress = () => {
-    navigation.navigate('formations'); // Naviguer vers l'écran des formations0
+    navigation.navigate('formations');
   };
 
   const handleDptPress = () => {
-    navigation.navigate('ChurchDepartmentsTable'); // Naviguer vers l'écran des départements
+    navigation.navigate('ChurchDepartmentsTable');
   };
 
   const handleVisionPress = () => {
-    navigation.navigate('VisionScreen'); // Naviguer vers l'écran de la vision
+    navigation.navigate('VisionScreen');
   };
 
   const handleDonPress = () => {
-    navigation.navigate('DonationScreen'); // Naviguer vers l'écran des dons
+    navigation.navigate('DonationScreen');
   };
 
   const handleShopPress = () => {
     const shopUrl = 'https://cep-resurrection.org/boutique/';
-    Linking.openURL(shopUrl); // Ouvrir l'URL dans le navigateur externe
+    Linking.openURL(shopUrl);
   };
 
   return (
-    <View  style={homeStyle.container}>
-       <Image source={require('../../assets/images/logo.png')} style={homeStyle.logo} />
-       <ScrollView>
-      {/* En-tête avec le logo */}
-      <View>
-       
-        <Swiper style={homeStyle.sliderContainer} autoplay={true} autoplayTimeout={3}>
-          <View>
-            <Image source={require('../../assets/images/ann.jpeg')} style={homeStyle.homeImg} />
-          </View>
-          <View>
-            <Image source={require('../../assets/images/mag.jpeg')}style={homeStyle.homeImg} />
-          </View>
-          <View>
-            <Image source={require('../../assets/images/sis.jpg')} style={homeStyle.homeImg} />
-          </View>
-        </Swiper>
-      </View>
-
-      {/* Contenu restant de la page */}
-      <Text style={homeStyle.prog}>Nos Programmes</Text>
-      <View style={homeStyle.imageContainer}>
-        <Image source={require('../../assets/images/mard.jpeg')} style={homeStyle.horaireImg} />
-        <Image source={require('../../assets/images/ven.jpeg')} style={homeStyle.horaireImg} />
-        <Image source={require('../../assets/images/dim.jpeg')} style={homeStyle.horaireImg} />
-      </View>
-      <TouchableOpacity onPress={handleFormationPress}>
-        <Image source={require('../../assets/images/formations.png')} style={homeStyle.formation} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleDonPress}>
-        <Image source={require('../../assets/images/dons.png')} style={homeStyle.formation} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleVisionPress}>
-        <Image source={require('../../assets/images/vision.png')} style={homeStyle.formation} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleDptPress}>
-        <Image source={require('../../assets/images/dept.png')} style={homeStyle.formation} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleShopPress}>
-        <Image source={require('../../assets/images/bout.jpeg')} style={homeStyle.formation} />
-      </TouchableOpacity>
-    </ScrollView>
+    <View style={homeStyle.container}>
+      <Image source={require('../../assets/images/logo.png')} style={homeStyle.logo} />
+      <ScrollView>
+        <View>
+          <Swiper style={homeStyle.sliderContainer} autoplay={true} autoplayTimeout={3}>
+            <View>
+              <Image source={require('../../assets/images/ann.jpeg')} style={homeStyle.homeImg} />
+            </View>
+            <View>
+              <Image source={require('../../assets/images/mag.jpeg')} style={homeStyle.homeImg} />
+            </View>
+            <View>
+              <Image source={require('../../assets/images/sis.jpg')} style={homeStyle.homeImg} />
+            </View>
+          </Swiper>
+        </View>
+        <Text style={homeStyle.prog}>Nos Programmes</Text>
+        <View style={homeStyle.imageContainer}>
+          <Image source={require('../../assets/images/mard.jpeg')} style={homeStyle.horaireImg} />
+          <Image source={require('../../assets/images/ven.jpeg')} style={homeStyle.horaireImg} />
+          <Image source={require('../../assets/images/dim.jpeg')} style={homeStyle.horaireImg} />
+        </View>
+        <TouchableOpacity onPress={handleFormationPress}>
+          <Image source={require('../../assets/images/formations.png')} style={homeStyle.formation} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleDonPress}>
+          <Image source={require('../../assets/images/dons.png')} style={homeStyle.formation} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleVisionPress}>
+          <Image source={require('../../assets/images/vision.png')} style={homeStyle.formation} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleDptPress}>
+          <Image source={require('../../assets/images/dept.png')} style={homeStyle.formation} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleShopPress}>
+          <Image source={require('../../assets/images/bout.jpeg')} style={homeStyle.formation} />
+        </TouchableOpacity>
+      </ScrollView>
     </View>
-    
   );
 }
 
 const homeStyle = StyleSheet.create({
   container: {
     flex: 1,
- 
   },
   sliderContainer: {
     height: 200,
     marginBottom: 10,
-  },
-  wrapper: {},
-  slide: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  slideImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-    borderRadius: 8,
   },
   homeImg: {
     width: 450,
@@ -103,7 +90,7 @@ const homeStyle = StyleSheet.create({
   imageContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center', // Alignement vertical au centre
+    alignItems: 'center',
     padding: 5,
   },
   horaireImg: {
@@ -112,7 +99,6 @@ const homeStyle = StyleSheet.create({
     resizeMode: 'cover',
   },
   prog: {
-    
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -126,6 +112,6 @@ const homeStyle = StyleSheet.create({
     height: 50,
     resizeMode: 'contain',
     marginBottom: 10,
-    marginTop: 40, // Ajustez cette valeur pour définir l'espace en haut du logo
+    marginTop: 40,
   },
 });
