@@ -47,6 +47,9 @@ export default function Home() {
             <View>
               <Image source={require('../../assets/images/sis.jpg')} style={homeStyle.homeImg} />
             </View>
+            <View>
+              <Image source={require('../../assets/images/40j.jpeg')} style={homeStyle.homeImg} />
+            </View>
           </Swiper>
         </View>
         <Text style={homeStyle.prog}>Nos Programmes</Text>

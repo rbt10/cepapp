@@ -1,6 +1,5 @@
-// NotificationService.ts
 import * as Notifications from 'expo-notifications';
-import * as Permissions from 'expo-permissions';
+
 
 async function requestPermissions(): Promise<void> {
   const { status } = await Notifications.getPermissionsAsync();
@@ -12,14 +11,14 @@ async function requestPermissions(): Promise<void> {
 async function scheduleNotifications(): Promise<void> {
   await requestPermissions();
 
-  // Les horaires sont en UTC, donc ajuste les heures selon ton fuseau horaire
+  // Les horaires sont ajustés pour une notification 1 heure avant
   const notifications = [
     {
       title: 'Culte d\'enseignement',
       body: 'Rappel : Culte d\'enseignement ce mardi à 19h.',
       trigger: {
         weekday: 2, // Mardi
-        hour: 19,
+        hour: 18,   // 18h pour un rappel à 19h (1 heure avant)
         minute: 0,
         repeats: true, // Répétition hebdomadaire
       },
@@ -29,7 +28,7 @@ async function scheduleNotifications(): Promise<void> {
       body: 'Rappel : Intercession ce vendredi à 19h.',
       trigger: {
         weekday: 5, // Vendredi
-        hour: 19,
+        hour: 18,   // 18h pour un rappel à 19h (1 heure avant)
         minute: 0,
         repeats: true, // Répétition hebdomadaire
       },
@@ -39,7 +38,7 @@ async function scheduleNotifications(): Promise<void> {
       body: 'Rappel : Culte de célébration ce dimanche à 11h.',
       trigger: {
         weekday: 7, // Dimanche
-        hour: 11,
+        hour: 10,   // 10h pour un rappel à 11h (1 heure avant)
         minute: 0,
         repeats: true, // Répétition hebdomadaire
       },
