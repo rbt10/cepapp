@@ -4,7 +4,7 @@ const churches = [
       responsible: 'Pasteur Djoudjou LELO',
       address: '4 Rue Sarah Bernhardt, 92600 Asnières-sur-Seine',
       phone: '+33 6 61 28 96 37',
-      email: 'ceprresurrection92@gmail.com',juuj,jyui(ààjnjn)
+      email: 'ceprresurrection92@gmail.com',
     },
     {
       location: 'Reims, France',
