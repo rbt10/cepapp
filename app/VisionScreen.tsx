@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     },
     scrollViewContent: {
       padding: 20,
+     
     },
     centerContainer: {
       marginBottom: 20,

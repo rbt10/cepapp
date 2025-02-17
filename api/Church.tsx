@@ -4,7 +4,7 @@ const churches = [
       responsible: 'Pasteur Djoudjou LELO',
       address: '4 Rue Sarah Bernhardt, 92600 Asnières-sur-Seine',
       phone: '+33 6 61 28 96 37',
-      email: 'ceprresurrection92@gmail.com',
+      email: 'ceprresurrection92@gmail.com',juuj,jyui(ààjnjn)
     },
     {
       location: 'Reims, France',
@@ -14,11 +14,12 @@ const churches = [
       email: 'cep.reims@cep-resurrection.org',
     },
     {
-      location: 'Ottawa, Canada',
-      responsible: 'Pasteur Aimé NSUBAYI',
-      address: '2285, Boulevard Saint-Laurent, Ottawa (ON, K1G 4Z7)',
-      phone: '+1 613 355-1970',
-      email: 'example@email.com',
+      location: 'Canada, Ottawa',
+      responsable : 'Pasteur Zorobabel KOUTIKI',
+      address : '235 Ch. de Montréal, Ottawa, ON K1L 5P8 (dérrière le centre Francophone)',
+      
+      phone : '+1 613 355-1970',
+      email : 'à venir',
     },
     {
       location: 'Port-Louis, Ile-Maurice',

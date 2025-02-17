@@ -29,7 +29,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
         <Stack.Screen name="DonationScreen" options={{ headerShown: false }} />
         <Stack.Screen name="ChurchDepartmentsTable" options={{ headerShown: false }} />
@@ -37,6 +37,7 @@ export default function RootLayout() {
         <Stack.Screen name="FormationDetailScreen" options={{ headerShown: false }} />
         <Stack.Screen name="VideoScreen"  options={{ headerShown: false }} />
         <Stack.Screen name="videoPlayer"  options={{ headerShown: false }} />
+        <Stack.Screen name="CelluleScreen"  options={{ headerShown: true, title: "Nos Cellules" }} />
       </Stack>
     </ThemeProvider>
   );

@@ -4,85 +4,76 @@ import { View, Text, StyleSheet,ImageBackground, ScrollView } from 'react-native
 const ChurchDepartmentsTable = () => {
     const departments = [
         {
-          title: 'Accueil',
-          description: 'Ce département est chargé d’accueillir les membres dans l’Église et d’organiser leur installation lors des services de l’Église.',
+            title: "Accueil",
+            description: "Ce département est chargé d’accueillir les membres dans l’Église et d’organiser leur installation."
         },
         {
-          title: 'Finances',
-          description: 'Ce département est responsable de la gestion des finances de l’Église. Il supervise la collecte des offrandes et des dons, tient à jour les comptes financiers, prépare les budgets, et assure la transparence et la responsabilité dans la gestion des ressources financières de l’Église.',
+            title: "Finances",
+            description: "Gère les finances de l’Église, supervise les offrandes, les dons et prépare les budgets."
         },
         {
-          title: 'Chorale',
-          description: 'Ce département est chargé de coordonner les activités liées à la musique, à la louange et à l’adoration lors des services religieux. Il inclut les équipes de musiciens et de choristes.',
+            title: "Chorale",
+            description: "Coordonne la musique, la louange et l’adoration pendant les services religieux."
         },
         {
-          title: 'CEP Kids',
-          description: 'Ce département est dédié à répondre aux besoins spirituels, émotionnels et sociaux des enfants de l’Église. Il offre un environnement sûr et engageant où les enfants peuvent apprendre et grandir dans leur foi.',
+            title: "Famille",
+            description: "Ce département regroupe les ministères dédiés aux couples, fiancés, hommes, femmes et enfants.",
+            ministries: [
+                {
+                    title: "Ministère des Couples",
+                    description: "Le ministère des couples accompagne les couples mariés à faire régner Christ dans leur foyer.",
+                    details: "Des générations sans divorce ! Le ministère des couples est là pour accompagner tous les couples mariés à faire régner Christ au sein de leur foyer. Le mariage est une institution divine qui honore Dieu et qui procure le bonheur à ceux qui le cultivent et le gardent."
+                },
+                {
+                    title: "Ministère des Fiancés",
+                    description: "Accompagnement des couples vers une vie conjugale basée sur les valeurs chrétiennes.",
+                    details: "Le ministère des fiancés joue un rôle crucial dans la préparation des couples à une vie conjugale fondée sur des valeurs chrétiennes, en leur offrant un accompagnement spirituel, émotionnel et pratique pendant leur période de fiançailles."
+                },
+                {
+                    title: "Ministère des Hommes",
+                    description: "Former des hommes selon la volonté de Dieu pour diriger leur vie et leur foyer.",
+                    details: "L’homme selon la volonté de Dieu est le chef, la tête, le garant de la vision de Dieu. Or, sans tête, le corps ne peut se diriger. En tant que tête, l’homme a pour rôle de diriger sa vie, son foyer, son église et la nation dans les voies du Seigneur."
+                },
+                {
+                    title: "Ministère des Femmes",
+                    description: "Encourager les femmes à jouer pleinement leur rôle selon les principes divins.",
+                    details: "La femme selon Dieu est une aide pour l’homme, afin que ce dernier accomplisse la vision et le plan de Dieu sur la Terre. Ayant une entière part dans l’héritage du Seigneur, les femmes par ce ministère s’entretiennent, s’aiguisent et se fortifient dans leur rôle."
+                },
+                {
+                    title: "CEP Kids",
+                    description: "Un espace dédié à l’éveil et l’enseignement des enfants dans la foi.",
+                    details: "Ce ministère est dédié aux enfants, pour leur offrir un cadre éducatif chrétien où ils peuvent grandir spirituellement et socialement."
+                }
+            ]
         },
         {
-          title: 'Intercession & délivrance',
-          description: 'Ce département est dédié à la prière au sein de l’Église. Il organise des réunions de prière et des temps de jeûne, et encourage les membres à développer une vie de prière régulière. Il accompagne également les personnes dans leurs besoins de prière particuliers (délivrance, cure d’âme, etc.).',
+            title: "Intercession & délivrance",
+            description: "Département dédié à la prière, aux temps de jeûne et aux besoins spirituels spécifiques."
         },
         {
-          title: 'Intégration',
-          description: 'Ce département est chargé d’accueillir les nouveaux membres dans l’Église et de faciliter leur intégration dans la communauté. Il organise des événements d’accueil, des visites à domicile, et fournit un soutien aux nouveaux convertis.',
+            title: "Entrepreneuriat",
+            description: "Encourage et soutient les initiatives entrepreneuriales des membres de l’Église."
         },
         {
-          title: 'Entrepreneuriat',
-          description: 'Ce département encourage et soutient les initiatives entrepreneuriales au sein de la congrégation. Il offre des ressources, des conseils et des opportunités de réseautage pour aider les membres de l’Église à développer leurs entreprises et à intégrer les principes chrétiens dans le monde des affaires.',
+            title: "Evangélisation",
+            description: "Promouvoir la mission de l’Église par des campagnes d’évangélisation et des missions humanitaires."
         },
         {
-          title: 'Evangélisation',
-          description: 'Ce département est chargé de promouvoir l’évangélisation et la mission de l’Église, tant au niveau local qu’international. Il organise des campagnes d’évangélisation, des missions humanitaires, et soutient les missionnaires sur le terrain.',
+            title: "Cellules de maison",
+            description: "Organise des groupes de vie pour favoriser la communion et la croissance spirituelle."
         },
         {
-          title: 'Cellules de maison',
-          description: 'Ce département est chargé de coordonner les cellules de maison ou les groupes de vie au sein de l’Église. Il encourage la formation de petites communautés de membres qui se réunissent régulièrement pour étudier la Bible, prier, se soutenir mutuellement et partager leur foi. Ces cellules de maison favorisent la croissance spirituelle et la connexion entre les membres de l’Église.',
+            title: "Médias",
+            description: "Gère la communication numérique de l’Église, incluant les réseaux sociaux et le site web."
         },
         {
-          title: 'Médias',
-          description: 'Le département des médias gère la présence en ligne et hors ligne de l’Église. Il supervise la production de contenu pour les réseaux sociaux, le site Web de l’Église, les bulletins d’information et d’autres supports de communication. Son objectif est de partager efficacement les événements de l’Église, les enseignements, et les messages pastoraux avec les membres et la communauté.',
+            title: "Sécurité",
+            description: "Supervise la sécurité des membres et des locaux de l’Église."
         },
         {
-          title: 'Ménage',
-          description: 'Ce département est responsable de maintenir la propreté et l’ordre dans les locaux de l’Église. Il veille à ce que les espaces de culte, les salles de réunion, les sanitaires et les autres zones communes soient propres et accueillants pour les membres de la congrégation et les visiteurs.',
-        },
-        {
-          title: 'Navette',
-          description: 'Ce département organise le transport des membres de l’Église, en particulier ceux qui ont des difficultés à se déplacer. Il coordonne les services de navette pour les personnes âgées, les personnes handicapées ou celles qui n’ont pas de moyen de transport pour se rendre aux services religieux et aux événements de l’Église.',
-        },
-        {
-          title: 'Protocole',
-          description: 'Le service de protocole a pour mission principale de soutenir les pasteurs dans l’exercice de ses fonctions pastorales, en veillant à ce que les services religieux se déroulent harmonieusement et que le pasteur dispose de tout le nécessaire pour accomplir son ministère avec efficacité.',
-        },
-        {
-          title: 'Santé',
-          description: 'Ce département se concentre sur le bien-être physique, émotionnel et spirituel des membres de l’Église. Il organise des programmes de promotion de la santé, des séminaires sur le bien-être, et offre un soutien pastoral aux personnes confrontées à des défis de santé.',
-        },
-        {
-          title: 'Formations',
-          description: 'Le département de la formation propose des programmes d’apprentissage et de développement pour les membres de l’Église. Il offre des cours bibliques, des séminaires théologiques, des ateliers de croissance spirituelle, et d’autres opportunités de formation pour renforcer la foi et l’engagement des membres.',
-        },
-        {
-          title: 'Services Généraux',
-          description: 'Ce département gère les aspects logistiques et opérationnels de l’Église. Il s’occupe de la maintenance des bâtiments, de la gestion des équipements, de la planification des événements, et de toute autre tâche nécessaire au bon fonctionnement de l’Église.',
-        },
-        {
-          title: 'Ressources Humaines',
-          description: 'Le département des ressources humaines gère les aspects liés au personnel au sein de l’Église. Il supervise le recrutement, la formation, l’évaluation et la rémunération du personnel pastoral et administratif. Il veille également au respect des politiques et des réglementations du travail, ainsi qu’au bien-être des employés de l’Église.',
-        },
-        {
-          title: 'Social',
-          description: 'Ce département s’occupe des besoins sociaux des membres de l’Église et de la communauté environnante. Il peut inclure des programmes d’aide sociale, des visites aux personnes âgées ou malades, et d’autres activités caritatives.',
-        },
-        {
-          title: 'Séniors',
-          description: 'Ce département s’adresse spécifiquement aux membres âgés de plus de 55 ans de l’Église. Il organise des activités, des groupes de soutien, et des services spécialement conçus pour répondre aux besoins spirituels, sociaux et émotionnels de nos seniors.',
-        },
-        {
-          title: 'Sécurité',
-          description: 'Le département de la sécurité est responsable de la sécurité des personnes et des biens au sein de l’Église. Il met en place des mesures de sécurité, supervise les équipes de sécurité lors des services et des événements, et répond aux situations d’urgence ou de crise.',
-        },
+            title: "Social",
+            description: "Soutien aux membres et actions caritatives pour la communauté."
+        }
       ];
       
 
@@ -95,55 +86,69 @@ const ChurchDepartmentsTable = () => {
               imageStyle={{ resizeMode: 'cover' }}
             
             />
-           
-           <ScrollView contentContainerStyle={styles.contentContainer}>
-              <Text style={styles.tableTitle}>Liste des Départements</Text>
-              {departments.map((department, index) => (
-                <View key={index} style={styles.textBlock}>
-                  <Text style={styles.departmentTitle}>{department.title}</Text>
-                  <Text style={styles.departmentDescription}>{department.description}</Text>
-                </View>
-              ))}
-            </ScrollView>    
+
+              <ScrollView contentContainerStyle={styles.contentContainer}>
+                  <Text style={styles.tableTitle}>Liste des Départements</Text>
+
+                  {departments.map((department, index) => (
+                      <View key={index} style={styles.textBlock}>
+                          <Text style={styles.departmentTitle}>{department.title}</Text>
+                          <Text style={styles.departmentDescription}>{department.description}</Text>
+
+                          {/* Si le département a des ministères, les afficher */}
+                          {department.ministries && (
+                              <View style={styles.subDepartmentsContainer}>
+                                  {department.ministries.map((ministry, index) => (
+                                      <View key={index} style={styles.subDepartmentBlock}>
+                                          <Text style={styles.subDepartmentTitle}>{ministry.title}</Text>
+                                          <Text style={styles.subDepartmentDescription}>{ministry.description}</Text>
+                                          <Text style={styles.subDepartmentDetails}>{ministry.details}</Text>
+                                      </View>
+                                  ))}
+                              </View>
+                          )}
+                      </View>
+                  ))}
+              </ScrollView>
         
           </View>
          
       );
     };
-    
-    const styles = StyleSheet.create({
-      container: {
+
+const styles = StyleSheet.create({
+    container: {
         flex: 1,
         backgroundColor: '#f0f0f0',
-       
-      },
-      contentContainer: {
+    },
+    contentContainer: {
         flexGrow: 1,
-        padding: 20,  
-      },
-      headerContainer: {
+        padding: 20,
+    },
+    headerContainer: {
         width: '100%',
         marginBottom: 20,
-      },
-      headerBackground: {
+        flex:1
+    },
+    headerBackground: {
         width: '100%',
         height: 200,
         justifyContent: 'center',
         alignItems: 'center',
-      },
-      headerText: {
+    },
+    headerText: {
         fontSize: 24,
         fontWeight: 'bold',
         color: '#fff',
-      },
-      tableTitle: {
+    },
+    tableTitle: {
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 10,
         color: '#333',
         textAlign: 'center',
-      },
-      departmentRow: {
+    },
+    departmentRow: {
         marginBottom: 20,
         padding: 15,
         backgroundColor: '#fff',
@@ -153,24 +158,73 @@ const ChurchDepartmentsTable = () => {
         shadowOpacity: 0.2,
         shadowRadius: 2,
         elevation: 2,
-      },
-      departmentTitle: {
+    },
+    departmentTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5,
         color: '#333',
-      },
-      departmentDescription: {
+    },
+    departmentDescription: {
         fontSize: 16,
         color: '#666',
-      },
-      textBlock: {
+    },
+    textBlock: {
         padding: 15,
         marginBottom: 20,
         backgroundColor: '#f9eae1',
         borderRadius: 10,
         elevation: 3,
-      },
-    });
+    },
+
+    // Nouveau style pour la famille et ses ministères
+    subDepartmentsContainer: {
+        marginLeft: 20,
+        marginTop: 10,
+        paddingLeft: 15,
+        borderLeftWidth: 3,
+        borderLeftColor: '#ffa500',
+        paddingBottom: 15,
+    },
+
+    subDepartmentBlock: {
+        marginBottom: 12,
+        padding: 10,
+        backgroundColor: '#fef3d7', // légérement différent pour les sous-départements
+        borderRadius: 8,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+        elevation: 2,
+    },
+    subDepartmentTitle: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#333',
+        marginBottom: 5,
+    },
+    subDepartmentDescription: {
+        fontSize: 14,
+        color: '#555',
+        marginBottom: 8,
+    },
+    subDepartmentDetails: {
+        fontSize: 12,
+        color: '#777',
+        lineHeight: 18,
+    },
+
+    // Style pour l'ombre et les bordures pour différencier les ministères de la famille
+    familyHeader: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        color: '#333',
+        textDecorationLine: 'underline',
+        textAlign: 'center',
+    },
+});
+
 
 export default ChurchDepartmentsTable;

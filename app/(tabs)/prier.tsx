@@ -14,9 +14,6 @@ const prier = () => {
       </ImageBackground>
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
-        <Text style={styles.introText}>
-          Vous pouvez soumettre une demande de prière en remplissant le formulaire ci-dessous. Nous serons ravis de prier pour vous.
-        </Text>
 
         <View style={styles.webViewContainer}>
           <WebView
