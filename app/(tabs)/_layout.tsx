@@ -41,7 +41,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="formations"
           options={{
-            title: 'Nos Formations',
+            title: 'Formations',
             tabBarIcon: ({ color }) => <FontAwesome size={28} name="graduation-cap" color={color} />,
           }}
         />

@@ -7,6 +7,16 @@ const churches = [
       email: 'ceprresurrection92@gmail.com',
     },
     {
+      location: 'Cotonou, Benin',
+      responsible : 'Pasteur Virgil Mahutin DOHOU',
+      Adresse : 'À Calvi après TOKAN en allant à TOGBA, 3ème rue à droite',
+      Téléphone : '+229 97 83 86 35',
+      Email : 'cepr.cotonou@gmail.com'
+
+
+
+    },
+    {
       location: 'Reims, France',
       responsible: 'Pasteur Brice KOUBA',
       address: '3 Rue Joseph Cugnot, 51430 Tinqueux',
@@ -15,7 +25,7 @@ const churches = [
     },
     {
       location: 'Canada, Ottawa',
-      responsable : 'Pasteur Zorobabel KOUTIKI',
+      responsible : 'Pasteur Zorobabel KOUTIKI',
       address : '235 Ch. de Montréal, Ottawa, ON K1L 5P8 (dérrière le centre Francophone)',
       
       phone : '+1 613 355-1970',
@@ -41,6 +51,13 @@ const churches = [
       address: '193 rue Marcel Merieux, Lyon, France',
       phone: '+33 6 01 44 51 76',
       email: 'cepresurrection.lyon@gmail.com',
+    },
+    {
+      location: 'Pologne',
+      responsible: 'Pasteur Pami  NGAMOKOUBA',
+      address: 'UL LAGIEWNICKA, 54/56 91-463 LODZ, ROOM NUMBER 7.16 BUILDING C',
+      phone: '+48 575 253 862, +33 758 23 53 34',
+      email: 'cepr.pologne@gmail.com',
     },
   ];
   

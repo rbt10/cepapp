@@ -1,30 +1,59 @@
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Linking, ActivityIndicator, ImageBackground, Image } from 'react-native';
-import React, { useState, useEffect } from 'react';
-import { fetchPlaylists } from '@/api/fetchPlaylists';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator, ImageBackground, Image, Button } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import YoutubePlayer from "react-native-youtube-iframe";
+import { fetchPlaylists, fetchVideosFromPlaylist } from '@/api/fetchPlaylists';
 
-const enseignements = () => {
-
-  const [videos, setVideos] = useState([]);
+const Enseignements = () => {
+  const [playlists, setPlaylists] = useState([]); // Stocke les playlists
+  const [videos, setVideos] = useState([]); // Stocke les vidéos de la playlist sélectionnée
+  const [selectedPlaylistId, setSelectedPlaylistId] = useState(null);
+  const [selectedVideoId, setSelectedVideoId] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    const playlistId = 'ID_DE_LA_PLAYLIST'; // Assurez-vous que playlistId est correctement défini
-    const fetchVideos = async () => {
+    const loadPlaylists = async () => {
       try {
-        const videosData = await fetchPlaylists(playlistId);
-        setVideos(videosData);
+        const playlistsData = await fetchPlaylists(); // Récupère les playlists
+        setPlaylists(playlistsData);
         setLoading(false);
       } catch (error) {
-        console.error('Erreur lors du chargement des vidéos :', error);
+        console.error('Erreur lors du chargement des playlists :', error);
         setLoading(false);
       }
     };
-    fetchVideos(); 
+    loadPlaylists();
   }, []);
 
-  const handleVideoPress = () => {
-    const playlistUrl = 'https://www.youtube.com/c/CepR%C3%A9surrectionTV/playlists';
-    Linking.openURL(playlistUrl);
+  // Charge les vidéos d'une playlist sélectionnée
+  const handlePlaylistPress = async (playlistId) => {
+    setLoading(true);
+    try {
+      const videosData = await fetchVideosFromPlaylist(playlistId);
+      setVideos(videosData);
+      setSelectedPlaylistId(playlistId);
+      setSelectedVideoId(null);
+    } catch (error) {
+      console.error('Erreur lors du chargement des vidéos :', error);
+    }
+    setLoading(false);
+  };
+
+  // Démarrer la lecture d'une vidéo
+  const handleVideoPress = (videoId) => {
+    setSelectedVideoId(videoId);
+    setPlaying(true);
+  };
+
+  // Pause / Play
+  const togglePlaying = useCallback(() => {
+    setPlaying((prev) => !prev);
+  }, []);
+
+  // Fermer le lecteur vidéo
+  const closePlayer = () => {
+    setPlaying(false);
+    setSelectedVideoId(null);
   };
 
   if (loading) {
@@ -37,32 +66,82 @@ const enseignements = () => {
 
   return (
     <View style={styles.container}>
+      {/* En-tête */}
       <ImageBackground
         source={require('../../assets/images/ense.jpg')}
         style={styles.headerBackground}
       >
-        <Text style={styles.title}>NOS ENSEIGNEMENTS PAR THÈME :</Text>
+        <Text style={styles.title}>NOS ENSEIGNEMENTS</Text>
         <Text style={styles.subtitle}>
-          Pour ne rien manquer, abonnez-vous et activez la cloche de notification sur YouTube
+          Sélectionnez une playlist pour voir les vidéos disponibles
         </Text>
       </ImageBackground>
-      <FlatList
-        data={videos}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.videoItem}
-            onPress={handleVideoPress} // Pas besoin de passer videoId ici
-          >
-            <Image
-              source={{ uri: item.snippet.thumbnails.default.url }}
-              style={styles.videoImage}
-            />
-            <Text style={styles.videoTitle}>{item.snippet.title}</Text>
-          </TouchableOpacity>
-        )}
-        contentContainerStyle={styles.flatListContent}
-      />
+
+      {/* Lecteur YouTube */}
+      {selectedVideoId && (
+        <View style={styles.videoContainer}>
+          <YoutubePlayer
+            height={220}
+            play={playing}
+            videoId={selectedVideoId}
+            onChangeState={(state) => {
+              if (state === "ended") setPlaying(false);
+            }}
+          />
+          <View style={styles.playerControls}>
+            <Button title={playing ? "Pause" : "Play"} onPress={togglePlaying} />
+            <Button title="Fermer" color="red" onPress={closePlayer} />
+          </View>
+        </View>
+      )}
+
+      {/* Liste des playlists */}
+      {!selectedPlaylistId ? (
+        <FlatList
+          data={playlists}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.playlistItem}
+              onPress={() => handlePlaylistPress(item.id)}
+            >
+              <Image
+                source={{ uri: item.snippet.thumbnails.default.url }}
+                style={styles.playlistImage}
+              />
+              <Text style={styles.playlistTitle}>{item.snippet.title}</Text>
+            </TouchableOpacity>
+          )}
+          contentContainerStyle={styles.flatListContent}
+        />
+      ) : (
+        /* Liste des vidéos d'une playlist sélectionnée */
+        <FlatList
+          data={videos}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.videoItem}
+              onPress={() => handleVideoPress(item.snippet.resourceId.videoId)}
+            >
+              <Image
+                  source={{ uri: item.snippet.thumbnails?.default?.url || 'https://via.placeholder.com/100' }} 
+                  style={styles.videoImage}
+              />
+
+              <Text style={styles.videoTitle}>{item.snippet.title}</Text>
+            </TouchableOpacity>
+          )}
+          contentContainerStyle={styles.flatListContent}
+        />
+      )}
+
+      {/* Bouton Retour aux playlists */}
+      {selectedPlaylistId && (
+        <TouchableOpacity style={styles.backButton} onPress={() => setSelectedPlaylistId(null)}>
+          <Text style={styles.backButtonText}>← Retour aux playlists</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -95,6 +174,34 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
   },
+  videoContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  playerControls: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 10,
+    gap: 10,
+  },
+  playlistItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  playlistImage: {
+    width: 100,
+    height: 100,
+    marginRight: 20,
+    borderRadius: 8,
+  },
+  playlistTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    flex: 1,
+  },
   videoItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -117,6 +224,19 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingBottom: 20,
   },
+  backButton: {
+    marginTop: 10,
+    padding: 10,
+    backgroundColor: '#007bff',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    borderRadius: 8,
+  },
+  backButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
 
-export default enseignements;
+export default Enseignements;

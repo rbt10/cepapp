@@ -54,7 +54,7 @@ export default function Home() {
               <Image source={require('../../assets/images/bloom.jpeg')} style={homeStyle.homeImg} />
             </View>
             <View>
-              <Image source={require('../../assets/images/lome.jpeg')} style={homeStyle.homeImg} />
+              <Image source={require('../../assets/images/doug.jpg')} style={homeStyle.homeImg} />
             </View>
             <View>
               <Image source={require('../../assets/images/pho.jpeg')} style={homeStyle.homeImg} />
@@ -132,6 +132,8 @@ const homeStyle = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 20
   },
   formation: {
     width: '100%',
