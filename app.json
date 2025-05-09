@@ -21,7 +21,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.rbt10.cepM",
-      "versionCode": 6
+      "versionCode": 7
     },
     "web": {
       "bundler": "metro",
